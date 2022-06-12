@@ -1,8 +1,11 @@
 version: "3.4.0"
 
 services:
-  quiz-efg-service:
-    image: efg-service
-    container_name: efg-service
-    ports:
-      - "80:80"
+  quiz-efg:
+    image: quiz-efg 
+    container_name: quiz-efg
+
+networks:
+  default:
+    name: backend
+    external: true

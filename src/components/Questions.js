@@ -66,7 +66,7 @@ const questions = [
       { value: "b", label: "+ R$4.000,00" },
       { value: "c", label: "+ R$5.000,00" },
       { value: "d", label: "+ R$10.000,00" },
-      { value: "e", label: "Quero ficar milionário!" },
+      { value: "e", label: "Ao infinito e além!" },
     ],
     shuffle: false,
     weigh: false,

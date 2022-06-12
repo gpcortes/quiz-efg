@@ -36,7 +36,7 @@ export default function Presentation({ index, onClick }) {
           <Typography variant="h1" style={{
 
             textAlign: "center",
-          }}>Vamos descobrir qual o curso que você vai fazer sem pagar nada?</Typography>
+          }}>Vamos descobrir qual o curso mais combina com você?</Typography>
           <Button variant="contained" color="primary" onClick={onClick}>Vamos começar</Button>
         </Box>
       </motion.div>
