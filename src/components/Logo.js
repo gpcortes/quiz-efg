@@ -1,7 +1,8 @@
-import React, { Fragment } from "react";
-import logoh from "../assets/logoh.svg";
-import logov from "../assets/logov.svg";
+import { Fragment } from "react";
 import { Box } from "@material-ui/core";
+import logoh from "../assets/logoh.png";
+import logov from "../assets/logov.png";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   logoh: {
@@ -20,13 +21,23 @@ export default function Logo() {
   const classes = useStyles();
 
   return (
-    <Fragment>
+    <Box style={{
+      textAlign: "center",
+    }}>
       <Box className={classes.logoh}>
-        <img src={logoh} />
+        <img src={logoh} alt="logo" style={{
+          width: "70%",
+          height: "100%",
+          textAlign: "center",
+        }} />
       </Box>
       <Box className={classes.logov}>
-        <img src={logov} />
+        <img src={logov} alt="logo" style={{
+          width: "100%",
+          height: "100%",
+          textAlign: "center",
+        }} />
       </Box>
-    </Fragment>
+    </Box>
   );
 }

@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { motion } from "framer-motion";
 import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Logo } from "./Logo";
+import Logo from "./Logo";
 
 const useStyles = makeStyles((theme) => ({
   question: {

@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Logo from "./Logo";
 
 const useStyles = makeStyles((theme) => ({
   question: {
@@ -53,6 +54,7 @@ export default function Question({ index, question, shuffle, onChange, answers, 
 
   return (
     <Fragment>
+
       <motion.div
         initial={{ x: "50vh" }}
         animate={{ x: 0 }}

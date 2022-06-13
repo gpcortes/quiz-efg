@@ -28,7 +28,7 @@ const questions = [
     options: [
       { value: "a", label: "Praticidade e curiosidade" },
       { value: "b", label: "Sistemas e construção" },
-      { value: "c", label: "Controle do tempo, commando e execução" },
+      { value: "c", label: "Controle do tempo, comando e execução" },
       { value: "d", label: "Pessoas de todos os níveis sociais e culturais" },
       { value: "e", label: "Discurso, Argumentação e persuasão" },
     ],
