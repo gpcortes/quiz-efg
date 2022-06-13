@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { motion } from "framer-motion";
-import FormControl from '@material-ui/core/FormControl';
 import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Logo } from "./Logo";
 
 const useStyles = makeStyles((theme) => ({
   question: {
@@ -33,8 +33,8 @@ export default function Presentation({ index, onClick }) {
         transition={{ stiffness: 150 }}
       >
         <Box key={index} className={classes.question}>
+          <Logo />
           <Typography variant="h1" style={{
-
             textAlign: "center",
           }}>Vamos descobrir qual o curso mais combina com você?</Typography>
           <Button variant="contained" color="primary" onClick={onClick}>Vamos começar</Button>
