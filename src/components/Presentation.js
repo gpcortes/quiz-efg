@@ -20,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1)
     },
   },
+  logo: {
+    ['@media (min-width:769px)']: {
+      margin: "0 auto",
+      width: "60%",
+    },
+  },
 }));
 
 export default function Presentation({ index, onClick }) {
@@ -32,8 +38,10 @@ export default function Presentation({ index, onClick }) {
         animate={{ x: 0 }}
         transition={{ stiffness: 150 }}
       >
-        <Box key={index} className={classes.question}>
+        <Box className={classes.logo} >
           <Logo />
+        </Box>
+        <Box key={index} className={classes.question}>
           <Typography variant="h1" style={{
             textAlign: "center",
           }}>Vamos descobrir qual o curso mais combina com você?</Typography>

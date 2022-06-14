@@ -54,7 +54,6 @@ export default function Question({ index, question, shuffle, onChange, answers, 
 
   return (
     <Fragment>
-
       <motion.div
         initial={{ x: "50vh" }}
         animate={{ x: 0 }}

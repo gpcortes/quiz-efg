@@ -1,10 +1,10 @@
 import "./styles.css";
 import Question from "./components/Question";
 import TypeForm from "./TypeForm"
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import questions from "./components/Questions";
-import { Container, makeStyles } from "@material-ui/core";
+import { Box, Container, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -14,6 +14,13 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       height: "100vh",
     },
+  },
+  logo: {
+    display: "flex",
+    flexDirection: "row",
+    width: "15%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
 
@@ -32,12 +39,14 @@ export default function App() {
     setFields(fields + 1);
   }
   return (
-    <Container className={classes.container}>
-      <TypeForm fields={fields} setFields={setFields} answers={answers} onSubmit={handleClick}>
-        {questions.map((question, index) => (
-          <Question key={index} index={index} question={question} shuffle={question.shuffle} onChange={handleChange} answers={answers} setAnswers={setAnswers} />
-        ))}
-      </TypeForm>
-    </Container>
+    <Fragment>
+      <Container className={classes.container}>
+        <TypeForm fields={fields} setFields={setFields} answers={answers} onSubmit={handleClick}>
+          {questions.map((question, index) => (
+            <Question key={index} index={index} question={question} shuffle={question.shuffle} onChange={handleChange} answers={answers} setAnswers={setAnswers} />
+          ))}
+        </TypeForm>
+      </Container>
+    </Fragment>
   );
 }
