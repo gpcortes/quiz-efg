@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "stretch",
-    width: "21rem",
+    width: "23rem",
     // height: "rem",
     padding: theme.spacing(3.5),
     // backgroundColor: "#fafafa",
