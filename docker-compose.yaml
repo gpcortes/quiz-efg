@@ -11,7 +11,7 @@ services:
       - "traefik.docker.network=backend"
       - "traefik.http.services.quiz-efg.loadbalancer.server.port=8000"
       #http
-      - "traefik.http.routers.quiz-efg_http.rule=Host(`quiz.${PRIMARY_DOMAIN_NAME}`)&&PathPrefix(`/`)"
+      - "traefik.http.routers.quiz-efg_http.rule=Host(`quiz_efg.${PRIMARY_DOMAIN_NAME}`)&&PathPrefix(`/`)"
       - "traefik.http.routers.quiz-efg_http.entrypoints=web"
       - "traefik.http.routers.quiz-efg_http.middlewares=https_redirect"
       #https
