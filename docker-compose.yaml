@@ -1,10 +1,12 @@
 version: "3.4.0"
 
 services:
-  quiz-efg:
+  app:
     image: quiz-efg 
     container_name: quiz-efg
-
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     labels:
       - "traefik.enable=true"
       - "traefik.constraint-label-stack=quiz-efg"
