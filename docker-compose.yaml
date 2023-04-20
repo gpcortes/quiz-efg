@@ -5,6 +5,20 @@ services:
     image: quiz-efg 
     container_name: quiz-efg
 
+    labels:
+      - "traefik.enable=true"
+      - "traefik.constraint-label-stack=quiz-efg"
+      - "traefik.docker.network=backend"
+      - "traefik.http.services.quiz-efg.loadbalancer.server.port=8000"
+      #http
+      - "traefik.http.routers.quiz-efg_http.rule=Host(`quiz.${PRIMARY_DOMAIN_NAME}`)&&PathPrefix(`/`)"
+      - "traefik.http.routers.quiz-efg_http.entrypoints=web"
+      - "traefik.http.routers.quiz-efg_http.middlewares=https_redirect"
+      #https
+      - "traefik.http.routers.quiz-efg_https.rule=Host(`extensao.${PRIMARY_DOMAIN_NAME}`)&&PathPrefix(`/`)"
+      - "traefik.http.routers.quiz-efg_https.entrypoints=websecure"
+      - "traefik.http.routers.quiz-efg_https.tls.certresolver=letsencryptresolver"
+
 networks:
   default:
     name: backend
