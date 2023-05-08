@@ -8,7 +8,7 @@ import { Box, Container, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    ['@media (min-width:425px)']: {
+    [theme.breakpoints.down(props => props.theme.constants.mobileBreakpoint)]: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",

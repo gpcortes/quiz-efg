@@ -1,6 +1,9 @@
 import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
 const theme = createTheme({
+  constants: {
+    mobileBreakpoint: '425px',
+  },
   typography: {
     fontFamily: [
       "Open Sans",
@@ -35,8 +38,6 @@ const theme = createTheme({
     },
   },
 });
-
-const MEDIA_QUERY_SMALL = '@media (max-width: 425px)';
 
 theme.typography = {
   ...theme.typography,

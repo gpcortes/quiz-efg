@@ -91,13 +91,13 @@ const useStyles = makeStyles((theme) => ({
   },
   qrcode: {
     textAlign: "center",
-    [MEDIA_QUERY_SMALL]: {
+    [theme.breakpoints.down(props => props.theme.constants.mobileBreakpoint)]: {
       display: "none",
     },
   },
   link: {
     textAlign: "center",
-    [MEDIA_QUERY_SMALL]: {
+    [theme.breakpoints.down(props => props.theme.constants.mobileBreakpoint)]: {
       display: "none",
     },
   },
