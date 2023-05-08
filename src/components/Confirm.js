@@ -141,7 +141,7 @@ export default function ConfirmPage({ answers }) {
                 <Box className={classes.card}>
                   <Typography variant="h2" style={{
                     textAlign: "center",
-                  }}>Faça sua inscrição</Typography>
+                  }}>Conheça nossas escolas</Typography>
                   <br />
                   <Box className={classes.qrcode}>
                     <QRCodeSVG value={course.url} bgColor="none" size="256" level="H" />

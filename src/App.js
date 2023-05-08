@@ -8,7 +8,7 @@ import { Box, Container, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    ['@media (min-width:769px)']: {
+    ['@media (min-width:425px)']: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
