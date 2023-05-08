@@ -91,13 +91,13 @@ const useStyles = makeStyles((theme) => ({
   },
   qrcode: {
     textAlign: "center",
-    ["@media (max-width: 768px)"]: {
+    [MEDIA_QUERY_SMALL]: {
       display: "none",
     },
   },
   link: {
     textAlign: "center",
-    ["@media (min-width: 769px)"]: {
+    [MEDIA_QUERY_SMALL]: {
       display: "none",
     },
   },
@@ -147,7 +147,7 @@ export default function ConfirmPage({ answers }) {
                     <QRCodeSVG value={course.url} bgColor="none" size="256" level="H" />
                   </Box>
                   <Box className={classes.link}>
-                    <Button href={course.url} variant="contained" color="primary">Inscreva-se</Button>
+                    <Button href={course.url} variant="contained" color="primary">Vistar escola</Button>
                   </Box>
                 </Box>
               </Box>

@@ -36,7 +36,7 @@ const theme = createTheme({
   },
 });
 
-
+const MEDIA_QUERY_SMALL = '@media (max-width: 425px)';
 
 theme.typography = {
   ...theme.typography,
