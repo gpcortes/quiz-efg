@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React from "react";
 import { Box } from "@material-ui/core";
 import logoh from "../assets/logoh.png";
 import logov from "../assets/logov.png";
@@ -6,12 +6,12 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   logoh: {
-    ['@media (max-width:768px)']: {
+    [theme.breakpoints.down('sm')]: {
       display: "none",
     },
   },
   logov: {
-    ['@media (min-width:769px)']: {
+    [theme.breakpoints.up('sm')]: {
       display: "none",
     },
   },

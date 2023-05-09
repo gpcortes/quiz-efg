@@ -1,14 +1,14 @@
 import "./styles.css";
 import Question from "./components/Question";
 import TypeForm from "./TypeForm"
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import questions from "./components/Questions";
-import { Box, Container, makeStyles } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    [`@media (min-width: ${(props) => props.theme.constants.mobileBreakpoint})`]: {
+    [theme.breakpoints.up('sm')]: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",

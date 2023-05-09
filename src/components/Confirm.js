@@ -1,7 +1,7 @@
 import React from "react";
 import { Fragment } from "react";
 import parse from 'html-react-parser';
-import { Button, Box, List, ListItem, ListItemText, Typography, Link } from "@material-ui/core";
+import { Button, Box, Typography } from "@material-ui/core";
 import { QRCodeSVG } from 'qrcode.react';
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   result: {
     display: "flex",
-    ["@media (max-width: 768px)"]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: "column",
       alignItems: "center",
     },
@@ -91,13 +91,13 @@ const useStyles = makeStyles((theme) => ({
   },
   qrcode: {
     textAlign: "center",
-    ["@media (max-width: 425px)"]: {
+    [theme.breakpoints.down('sm')]: {
       display: "none",
     },
   },
   link: {
     textAlign: "center",
-    ["@media (min-width: 425px)"]: {
+    [theme.breakpoints.up('sm')]: {
       display: "none",
     },
   },

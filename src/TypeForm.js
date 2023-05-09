@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import Button from '@material-ui/core/Button';
-import ButtonGroup from "@material-ui/core/ButtonGroup";
+import React from "react";
 import Confirm from "./components/Confirm";
 import Presentation from "./components/Presentation";
 
@@ -8,12 +6,12 @@ export default function TypeForm({ children, onSubmit, fields, setFields, answer
 
   children = [<Presentation onClick={onSubmit} />, ...children, <Confirm answers={answers} />];
 
-  const nextField = () => {
-    if (fields < children.length) setFields((prev) => prev + 1);
-  };
-  const prevField = () => {
-    if (fields > 0) setFields((prev) => prev - 1);
-  };
+  // const nextField = () => {
+  //   if (fields < children.length) setFields((prev) => prev + 1);
+  // };
+  // const prevField = () => {
+  //   if (fields > 0) setFields((prev) => prev - 1);
+  // };
 
   return (
     <React.Fragment>

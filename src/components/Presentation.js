@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { motion } from "framer-motion";
 import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    ['@media (min-width:769px)']: {
+    [theme.breakpoints.up('sm')]: {
       margin: "0 auto",
       width: "60%",
     },
