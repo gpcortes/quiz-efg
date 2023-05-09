@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   result: {
     display: "flex",
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: "column",
       alignItems: "center",
     },
@@ -91,13 +91,13 @@ const useStyles = makeStyles((theme) => ({
   },
   qrcode: {
     textAlign: "center",
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: "none",
     },
   },
   link: {
     textAlign: "center",
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: "none",
     },
   },

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       margin: "0 auto",
       width: "60%",
     },
