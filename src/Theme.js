@@ -2,13 +2,13 @@ import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
 const theme = createTheme({
   breakpoints: {
-    values: {
+    // values: {
       xs: 0,
       sm: 425,
       md: 960,
       lg: 1280,
       xl: 1920,
-    },
+    // },
   },
   typography: {
     fontFamily: [
