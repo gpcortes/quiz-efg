@@ -1,8 +1,7 @@
 import "./styles.css";
 import Question from "./components/Question";
 import TypeForm from "./TypeForm"
-import React, { Fragment, useState } from "react";
-
+import React, { Fragment, useState, useEffect } from "react";
 import questions from "./components/Questions";
 import { Container, makeStyles } from "@material-ui/core";
 
@@ -25,6 +24,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function App() {
+  const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
+
+  useEffect(() => {
+    function handleOrientationChange() {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    }
+
+    function handleResize() {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    }
+
+    window.addEventListener("orientationchange", handleOrientationChange);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("orientationchange", handleOrientationChange);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const classes = useStyles();
 
   const [fields, setFields] = useState(0);
@@ -41,10 +59,11 @@ export default function App() {
   return (
     <Fragment>
       <Container className={classes.container}>
+        {/* {isPortrait ? <p>Modo portrait</p> : <p>Modo landscape</p>} */}
         <TypeForm fields={fields} setFields={setFields} answers={answers} onSubmit={handleClick}>
           {questions.map((question, index) => (
             <Question key={index} index={index} question={question} shuffle={question.shuffle} onChange={handleChange} answers={answers} setAnswers={setAnswers} />
-          ))}
+            ))}
         </TypeForm>
       </Container>
     </Fragment>

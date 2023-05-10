@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // import Logo from "./Logo";
+import VirtualKeyboard from "./Keyboard";
 
 const useStyles = makeStyles((theme) => ({
   question: {

@@ -1,10 +1,11 @@
 import React from "react";
 import Confirm from "./components/Confirm";
 import Presentation from "./components/Presentation";
+import VirtualKeyboard from "./components/Keyboard";
 
 export default function TypeForm({ children, onSubmit, fields, setFields, answers }) {
 
-  children = [<Presentation onClick={onSubmit} />, ...children, <Confirm answers={answers} />];
+  children = [<Presentation onClick={onSubmit} />, <VirtualKeyboard onClick={onSubmit} />, ...children, <Confirm answers={answers} />];
 
   // const nextField = () => {
   //   if (fields < children.length) setFields((prev) => prev + 1);
