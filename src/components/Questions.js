@@ -21,7 +21,7 @@ const questions = [
       { value: "e", label: "Artes" },
     ],
     shuffle: true,
-    weigh: false,
+    weigh: true,
   },
   {
     title: "Com o que você mais se identifica?",

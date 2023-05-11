@@ -56,11 +56,17 @@ export default function App() {
   const handleClick = (event) => {
     setFields(fields + 1);
   }
+
+  const handleSubmit = (formId) => {
+    console.log("Submit form");
+    const form = document.getElementById(formId);
+    form.submit();
+  }
   return (
     <Fragment>
       <Container className={classes.container}>
         {/* {isPortrait ? <p>Modo portrait</p> : <p>Modo landscape</p>} */}
-        <TypeForm fields={fields} setFields={setFields} answers={answers} onSubmit={handleClick}>
+        <TypeForm fields={fields} answers={answers} onSubmit={handleClick} next={handleClick}>
           {questions.map((question, index) => (
             <Question key={index} index={index} question={question} shuffle={question.shuffle} onChange={handleChange} answers={answers} setAnswers={setAnswers} />
             ))}

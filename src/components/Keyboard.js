@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useRef } from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
+import { TextField } from "@material-ui/core";
+import { motion } from "framer-motion";
 
 export default function VirtualKeyboard({ onClick }) {
     const [layoutName, setLayoutName] = useState("default");
@@ -38,13 +40,19 @@ export default function VirtualKeyboard({ onClick }) {
 
     return (
         <Fragment>
-            <input value={input.toUpperCase()} onChange={(e) => setInput(e.target.value)} />
-            <Keyboard
-                keyboardRef={r => (keyboardRef.current = r)}
-                layoutName={layoutName}
-                onChange={onChange}
-                onKeyPress={onKeyPress}
-            />
+            <motion.div
+                initial={{ x: "50vh" }}
+                animate={{ x: 0 }}
+                transition={{ stiffness: 150 }}
+            >
+                <TextField label="Seu nome" value={input.toUpperCase()} onChange={(e) => setInput(e.target.value)} variant="outlined" />
+                <Keyboard
+                    keyboardRef={r => (keyboardRef.current = r)}
+                    layoutName={layoutName}
+                    onChange={onChange}
+                    onKeyPress={onKeyPress}
+                />
+            </motion.div>
         </Fragment>
     )
 }

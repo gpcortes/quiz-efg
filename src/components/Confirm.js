@@ -117,10 +117,6 @@ export default function ConfirmPage({ answers }) {
     return acc;
   });
 
-  const reload = () => {
-    window.location.reload();
-  }
-
   return (
     <Fragment>
       <Box className={classes.header}>
@@ -152,7 +148,7 @@ export default function ConfirmPage({ answers }) {
                 </Box>
               </Box>
               <Box className={classes.footer}>
-                <Button variant="contained" color="primary" onClick={reload} >Recomeçar</Button>
+                <Button type="submit" variant="contained" color="primary" >Recomeçar</Button>
               </Box>
             </Box>
           )

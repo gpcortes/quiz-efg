@@ -1,44 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Confirm from "./components/Confirm";
 import Presentation from "./components/Presentation";
-import VirtualKeyboard from "./components/Keyboard";
+import Form from "./components/Identification";
 
-export default function TypeForm({ children, onSubmit, fields, setFields, answers }) {
+export default function TypeForm({ children, onSubmit, next, fields, answers }) {
 
-  children = [<Presentation onClick={onSubmit} />, <VirtualKeyboard onClick={onSubmit} />, ...children, <Confirm answers={answers} />];
-
-  // const nextField = () => {
-  //   if (fields < children.length) setFields((prev) => prev + 1);
-  // };
-  // const prevField = () => {
-  //   if (fields > 0) setFields((prev) => prev - 1);
-  // };
+  children = [<Presentation onClick={next} />, <Form onSubmit={next} />, ...children, <Confirm answers={answers} />];
 
   return (
-    <React.Fragment>
+    <Fragment>
       <form onSubmit={onSubmit}>
         {children[fields]}
-
-        {/* <div className={classes.navigation}>
-          <ButtonGroup
-            disableElevation
-            size="small"
-            variant="contained"
-            color="primary"
-          >
-            {fields < children.length - 1 && fields > 0 && (
-              <Button onClick={prevField}>Anterior</Button>
-            )}
-            {fields < children.length - 2 && (
-              <Button onClick={nextField}>Proxima</Button>
-            )}
-            {fields === children.length - 2 && (
-              <Button onClick={nextField}>Enviar</Button>
-            )}
-            cons.log(children);
-          </ButtonGroup>
-        </div> */}
       </form>
-    </React.Fragment >
+    </Fragment >
   );
 }
