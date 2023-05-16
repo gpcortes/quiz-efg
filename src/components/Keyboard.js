@@ -1,14 +1,38 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { Fragment, useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { Box, TextField, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
-import { TextField } from "@material-ui/core";
-import { motion } from "framer-motion";
 
-export default function VirtualKeyboard({ onClick }) {
+const useStyles = makeStyles((theme) => ({
+    keyboard: {
+        [theme.breakpoints.down('xs')]: {
+            display: 'none',
+        },
+        [theme.breakpoints.up('sm')]: {
+            width: '600px',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '800px',
+        },
+        marginTop: '50px',
+    },
+}));
+
+
+export default function Form({ onSubmit }) {
+    const classes = useStyles();
     const [layoutName, setLayoutName] = useState("default");
     const [input, setInput] = useState("");
-
     const keyboardRef = useRef(null);
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            onSubmit(input);
+        };
+    };
 
     const onChange = input => {
         setInput(input);
@@ -28,7 +52,7 @@ export default function VirtualKeyboard({ onClick }) {
     };
 
     const handleEnter = button => {
-        onClick(input);
+        onSubmit(input);
         console.log("Button pressed", button);
     };
 
@@ -45,14 +69,21 @@ export default function VirtualKeyboard({ onClick }) {
                 animate={{ x: 0 }}
                 transition={{ stiffness: 150 }}
             >
-                <TextField label="Seu nome" value={input.toUpperCase()} onChange={(e) => setInput(e.target.value)} variant="outlined" />
+                <Box className={classes.question}>
+                    <Typography variant="h1">Qual seu nome?</Typography>
+                    <TextField disabled name="nome" label="Seu nome" value={input.toUpperCase()} onKeyDown={handleKeyDown} onSubmit={onSubmit} onChange={(e) => setInput(e.target.value)} variant="outlined" />
+                </Box>
                 <Keyboard
+                    theme={"hg-theme-default " + classes.keyboard}
                     keyboardRef={r => (keyboardRef.current = r)}
                     layoutName={layoutName}
                     onChange={onChange}
                     onKeyPress={onKeyPress}
+                    physicalKeyboardHighlight={true}
                 />
             </motion.div>
         </Fragment>
     )
 }
+
+// debora@qualipix.com.br

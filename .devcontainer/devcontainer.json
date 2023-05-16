@@ -12,13 +12,14 @@
         "vscode": {
             "settings": {},
             "extensions": [
-                "streetsidesoftware.code-spell-checker"
+                "streetsidesoftware.code-spell-checker",
+                "EditorConfig.EditorConfig"
             ]
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [3000],''
-    // Use 'portsAttributes' to set default properties for specific forwarded ports. 
+    // Use 'portsAttributes' to set default properties for specific forwarded ports.
     // More info: https://containers.dev/implementors/json_reference/#port-attributes
     "portsAttributes": {
         "9000": {

@@ -1,76 +1,90 @@
 import React, { Fragment } from "react";
-import { motion } from "framer-motion";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { Box, Typography } from "@material-ui/core";
+import { Box, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// import Logo from "./Logo";
-import VirtualKeyboard from "./Keyboard";
+import ReactPhoneInput from 'react-phone-input-material-ui';
+
 
 const useStyles = makeStyles((theme) => ({
-  question: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    "& > *": {
-      margin: theme.spacing(2)
+    question: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        "& > *": {
+            margin: theme.spacing(2)
+        },
     },
-  },
-  answer: {
-    textAlign: "justify",
-    "& > *": {
-      margin: theme.spacing(1)
+    answer: {
+        textAlign: "justify",
+        "& > *": {
+            margin: theme.spacing(1)
+        },
     },
-  },
 }));
 
-export default function Question({ index, question, shuffle, onChange, answers, setAnswers }) {
-  const classes = useStyles();
+export default function Question(props) {
+    const classes = useStyles();
 
-  const handleAnswers = (index, value) => {
-    if (question.weigh === true) {
-      setAnswers([...answers, answers[index] = value]);
-    };
-  }
-
-  const handleChange = (event) => {
-    handleAnswers(index, event.target.value);
-    onChange(event);
-  }
-
-  const shuffleArray = (arr) => {
-    if (shuffle) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
+    const handleOnChange = (event) => {
+        if (props.question.weigh && props.question.weigh === true) {
+            props.setAnswers(event.target.value);
+        }
+        props.onChange(event.target.value);
     }
-    return arr;
-  }
 
-  const options = shuffleArray(question.options);
+    const shuffleArray = (arr) => {
+        if (props.shuffle) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+        return arr;
+    }
 
-  return (
-    <Fragment>
-      <motion.div
-        initial={{ x: "50vh" }}
-        animate={{ x: 0 }}
-        transition={{ stiffness: 150 }}
-      >
-        <Box className={classes.question} onChange={handleChange}>
-          <Typography variant="h1" >{index + 1}. {question.title}</Typography>
-          <FormControl>
-            <RadioGroup aria-label="question" name="question">
-              {options.map((option) => (
-                  <FormControlLabel className={classes.answer} key={option.value} value={option.value} control={<Radio />} label={option.label} />
-              ))}
-            </RadioGroup>
-          </FormControl>
-        </Box>
-      </motion.div>
-    </Fragment>
-  );
+    const options = shuffleArray(props.question.options);
+
+    return (
+        <Fragment>
+            {(props.question.type === "RadioGroup") && (
+                <Box className={classes.question} onChange={handleOnChange}>
+                    {props.setKeyboard && props.setKeyboard(false)}
+                    <Typography variant="h1" >{props.index}. {props.question.title}</Typography>
+                    <RadioGroup aria-label="question" name="question">
+                        {options.map((option) => (
+                            <FormControlLabel className={classes.answer} value={option.value} control={<Radio />} label={option.label} />
+                        ))}
+                    </RadioGroup>
+                </Box>)}
+            {(props.question.type === "TextField") && (
+                < Box className={classes.question}>
+                    {props.setKeyboard && props.setKeyboard(true)}
+                    <Typography variant="h1" >{props.index + 1}. {props.question.title}</Typography>
+                    <TextField
+                        disabled value={props.value}
+                        variant="outlined"
+                        label={props.question.label}
+                        inputProps={{ style: { textTransform: "uppercase" } }} />
+                </Box>)
+            }
+            {(props.question.type === "PhoneField") && (
+                < Box className={classes.question}>
+                    {props.setKeyboard && props.setKeyboard(true)}
+                    <Typography variant="h1" >{props.index + 1}. {props.question.title}</Typography>
+                    <ReactPhoneInput
+                        defaultCountry="br"
+                        disabled value={`+55${props.value}`}
+                        component={TextField}
+                        inputProps={{
+                            label: props.question.label,
+                            variant: 'outlined',
+                        }}
+                    />
+                </Box>)
+            }
+        </Fragment >
+    );
 }
