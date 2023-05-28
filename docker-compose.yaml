@@ -1,27 +1,29 @@
-version: "3.4.0"
+version: '3.4.0'
 
 services:
-  app:
-    image: quiz-efg 
-    container_name: quiz-efg
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    labels:
-      - "traefik.enable=true"
-      - "traefik.constraint-label-stack=quiz-efg"
-      - "traefik.docker.network=backend"
-      - "traefik.http.services.quiz-efg.loadbalancer.server.port=80"
-      #http
-      - "traefik.http.routers.quiz-efg_http.rule=Host(`quiz.${PRIMARY_DOMAIN_NAME}`)&&PathPrefix(`/`)"
-      - "traefik.http.routers.quiz-efg_http.entrypoints=web"
-      - "traefik.http.routers.quiz-efg_http.middlewares=https_redirect"
-      #https
-      - "traefik.http.routers.quiz-efg_https.rule=Host(`quiz.${PRIMARY_DOMAIN_NAME}`)&&PathPrefix(`/`)"
-      - "traefik.http.routers.quiz-efg_https.entrypoints=websecure"
-      - "traefik.http.routers.quiz-efg_https.tls.certresolver=letsencryptresolver"
+    app:
+        image: quiz-efg
+        container_name: quiz-efg
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        environment:
+            - TOKEN_JWT: ${TOKEN_JWT}
+        labels:
+            - 'traefik.enable=true'
+            - 'traefik.constraint-label-stack=quiz-efg'
+            - 'traefik.docker.network=backend'
+            - 'traefik.http.services.quiz-efg.loadbalancer.server.port=80'
+            #http
+            - 'traefik.http.routers.quiz-efg_http.rule=Host(`quiz.${PRIMARY_DOMAIN_NAME}`)&&PathPrefix(`/`)'
+            - 'traefik.http.routers.quiz-efg_http.entrypoints=web'
+            - 'traefik.http.routers.quiz-efg_http.middlewares=https_redirect'
+            #https
+            - 'traefik.http.routers.quiz-efg_https.rule=Host(`quiz.${PRIMARY_DOMAIN_NAME}`)&&PathPrefix(`/`)'
+            - 'traefik.http.routers.quiz-efg_https.entrypoints=websecure'
+            - 'traefik.http.routers.quiz-efg_https.tls.certresolver=letsencryptresolver'
 
 networks:
-  default:
-    name: backend
-    external: true
+    default:
+        name: backend
+        external: true

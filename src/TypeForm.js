@@ -1,51 +1,17 @@
-import React, { Fragment, useState, useRef } from "react";
-import { Container, FormControl, makeStyles } from "@material-ui/core";
-import { motion } from "framer-motion";
-import Keyboard from 'react-simple-keyboard';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Container, makeStyles } from '@material-ui/core';
+import { motion } from 'framer-motion';
 import 'react-simple-keyboard/build/css/index.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-
-
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         [theme.breakpoints.up('sm')]: {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100vh",
-        },
-    },
-    formControl: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    keyboard: {
-        [theme.breakpoints.down('xs')]: {
-            display: 'none',
-        },
-        [theme.breakpoints.up('sm')]: {
-            width: '600px',
-        },
-        [theme.breakpoints.up('md')]: {
-            width: '800px',
-        },
-        marginTop: '50px',
-    },
-    question: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        "& > *": {
-            margin: theme.spacing(2)
-        },
-    },
-    answer: {
-        textAlign: "justify",
-        "& > *": {
-            margin: theme.spacing(1)
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100vh',
         },
     },
 }));
@@ -53,111 +19,97 @@ const useStyles = makeStyles((theme) => ({
 export default function TypeForm(props) {
     const classes = useStyles();
     const [index, setIndex] = useState(0);
-    const [layoutName, setLayoutName] = useState("default");
-    const [formValues, setFormValues] = useState({});
-    const [keyboard, setKeyboard] = useState(false);
-    const [quizAnswers, setQuizAnswers] = useState([]);
-    const keyboardRef = useRef(null)
+    const [formValues, setFormValues] = useState([]);
+    const [next, setNext] = useState(false);
 
-
-    const children = React.Children.map(props.children, (child) => {
-        return child;
-    });
+    useEffect(() => {
+        if (next) {
+            setNext(false);
+            nextField();
+        }
+    }, [next]);
 
     const nextField = () => {
         if (index < children.length) setIndex((prev) => prev + 1);
-    }
+        if (index >= children.length) {
+            console.log(formValues);
+            // window.location.reload(true);
+        }
+    };
 
     // const prevField = () => {
     //     if (index > 0) setIndex((prev) => prev - 1);
     // };
 
-    const onKeyPress = button => {
-        if (button === "{shift}" || button === "{lock}") handleShift();
-
-        if (button === "{enter}") handleEnter();
-    };
-
-    const handleShift = () => {
-        setLayoutName(layoutName === "default" ? "shift" : "default");
-    };
-
-    const handleEnter = button => {
-        nextField();
-    };
-
-    const handleSetFieldValues = (value) => {
-        setFormValues((prevFormValues) => ({
-            ...prevFormValues,
-            [index]: value,
-        }));
-    };
-
-    const handleSetQuizAnswers = (value) => {
-        setQuizAnswers((prevQuizAnswers) => ([
-            ...prevQuizAnswers,
-            value,
-        ]));
-    };
-
-    const handleNextField = (value) => {
+    const handleSetFieldValues = (value, weigh) => {
         const trimmedValue = String(value).trim();
-        if (trimmedValue !== "") {
-            handleSetFieldValues(trimmedValue.toUpperCase());
+        const fieldValue = {
+            id: index,
+            value: trimmedValue,
+            weigh: weigh,
+        };
+        if (fieldValue.value !== '') {
+            setFormValues((prevFormValues) => {
+                const newFormValues = prevFormValues.slice();
+                newFormValues[index] = fieldValue;
+                return newFormValues;
+            });
         }
-        nextField();
     };
 
-    const onSubmit = (value) => {
-        handleSetQuizAnswers(value);
-        console.log(formValues);
+    const onSubmit = async (event) => {
+        event.preventDefault();
+
+        const api = axios.create({
+            baseURL: process.env.QUIZ_BACKEND_BASEURL,
+        });
+
+        api.interceptors.request.use((config) => {
+            const token = process.env.TOKEN_JWT;
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
+        });
+
+        try {
+            const response = await api.post('/endpoint', formValues);
+
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
-    // const numLayout = {
-    //     default: ["1 2 3", "4 5 6", "7 8 9", "{bksp} 0 {enter}"],
-    //     shift: ["! @ #", "$ % ^", "& * (", "{shift} ) {bksp}"]
-    // };
+    const children = React.Children.map(props.children, (child, idx) => {
+        return (
+            <motion.div
+                initial={{ x: '75vh', opacity: 0 }}
+                animate={{ x: 0, opacity: idx === index ? 1 : 0 }}
+                transition={{
+                    stiffness: 150,
+                    duration: 0.35,
+                    ease: 'easeInOut',
+                }}
+            >
+                {React.cloneElement(child, {
+                    ...props,
+                    index: index,
+                    value: formValues[index] || '',
+                    sendValue: handleSetFieldValues,
+                    next: next,
+                    setNext: setNext,
+                    answers: formValues,
+                })}
+            </motion.div>
+        );
+    });
 
     return (
         <Fragment>
             <Container className={classes.container}>
-                <form onSubmit={onSubmit}>
-                    <FormControl className={classes.formControl}>
-                        <motion.div
-                            initial={{ x: "50vh" }}
-                            animate={{ x: 0 }}
-                            transition={{ stiffness: 150 }}
-                        >
-                            {React.cloneElement(children[index], {
-                                ...props,
-                                index: index,
-                                setKeyboard: setKeyboard,
-                                answers: quizAnswers,
-                                setAnswers: handleSetQuizAnswers,
-                                onChange: handleNextField,
-                                value: formValues[index] || "",
-                            })}
-                        </motion.div>
-                        {keyboard && (
-                            <Keyboard
-                                theme={"hg-theme-default " + classes.keyboard}
-                                keyboardRef={r => (keyboardRef.current = r)}
-                                layoutName={layoutName}
-                                onKeyPress={onKeyPress}
-                                onChange={handleSetFieldValues}
-                                inputName={`field${index}`}
-                                physicalKeyboardHighlight={true}
-                                // layout={numLayout}
-                                mergeDisplay={true}
-                                display={{
-                                    '{bksp}': 'Corrigir',
-                                    '{enter}': ' Enviar ',
-                                }}
-                            />
-                        )}
-                    </FormControl>
-                </form>
+                <form onSubmit={onSubmit}>{children[index]}</form>
             </Container>
-        </Fragment >
+        </Fragment>
     );
 }
