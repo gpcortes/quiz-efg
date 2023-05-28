@@ -65,7 +65,7 @@ export default function TypeForm(props) {
         });
 
         api.interceptors.request.use((config) => {
-            const token = process.env.TOKEN_JWT;
+            const token = process.env.QUIZ_AUTH_JWT_TOKEN;
             if (token) {
                 config.headers.Authorization = `Bearer ${token}`;
             }

@@ -8,7 +8,8 @@ services:
             context: .
             dockerfile: ./Dockerfile
         environment:
-            - TOKEN_JWT: ${TOKEN_JWT}
+            - QUIZ_AUTH_JWT_TOKEN: ${QUIZ_AUTH_JWT_TOKEN}
+            - QUIZ_BACKEND_BASEURL: ${QUIZ_BACKEND_BASEURL}
         labels:
             - 'traefik.enable=true'
             - 'traefik.constraint-label-stack=quiz-efg'
