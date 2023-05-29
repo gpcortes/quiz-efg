@@ -6,6 +6,10 @@ import {
     Box,
     TextField,
     Typography,
+    Select,
+    MenuItem,
+    Button,
+    ButtonGroup,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import VirtualKeyboard from './Keyboard';
@@ -28,6 +32,19 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
         },
     },
+    select: {
+        maxHeight: 48 * 4.5 + 8,
+        width: 350,
+    },
+    menuItem: {
+        backgroundColor: '#fff',
+        '&:hover': {
+            backgroundColor: '#eee',
+        },
+        '&:focus': {
+            backgroundColor: '#eee',
+        },
+    },
 }));
 
 export default function Question(props) {
@@ -37,8 +54,13 @@ export default function Question(props) {
             ? props.question.prefix + props.value
             : props.value
     );
+    const [isValid, setIsValid] = useState(true);
 
     const [keyboardLayout, setKeyboardLayout] = useState(props.question.type);
+
+    const handleSendAnswer = () => {
+        props.sendValue(props.question.id, value, props.question.weigh);
+    };
 
     useEffect(() => {
         if (props.next) {
@@ -46,8 +68,12 @@ export default function Question(props) {
         }
     }, [props.next]);
 
-    const handleSendAnswer = () => {
-        props.sendValue(value, props.question.weigh);
+    const handleClick = () => {
+        if (value) {
+            props.setNext(true);
+        } else {
+            setIsValid(false);
+        }
     };
 
     const handleChange = (event) => {
@@ -61,11 +87,14 @@ export default function Question(props) {
                 },
             };
         }
+
         setValue(newEvent.target.value);
         if (props.question.type === 'SingleOption') {
             props.setNext(true);
         }
     };
+
+    const handleSelect = (nextQuestion) => props.setNextQuestion(nextQuestion);
 
     function shuffleOptions(question) {
         const { options, shuffle } = question;
@@ -104,15 +133,56 @@ export default function Question(props) {
                                 value={option.value}
                                 control={<Radio />}
                                 label={option.label}
+                                onChange={() => {
+                                    if (option.nextQuestion) {
+                                        handleSelect(option.nextQuestion);
+                                    } else {
+                                        handleSelect(null);
+                                    }
+                                }}
                             />
                         ))}
                     </RadioGroup>
                 </Box>
             )}
+            {shuffledQuestion.type === 'SelectOption' && (
+                <Box className={classes.question} type={shuffledQuestion.type}>
+                    <Typography variant="h1">
+                        {props.index}. {shuffledQuestion.title}
+                    </Typography>
+                    <ButtonGroup>
+                        <Select
+                            defaultValue=""
+                            // variant="outlined"
+                            onChange={handleChange}
+                            className={classes.select}
+                            error={!isValid}
+                        >
+                            {shuffledQuestion.options.map((option, idx) => (
+                                <MenuItem
+                                    className={classes.menuItem}
+                                    key={idx}
+                                    value={option.value}
+                                    onClick={() => {
+                                        if (option.nextQuestion) {
+                                            handleSelect(option.nextQuestion);
+                                        } else {
+                                            handleSelect(null);
+                                        }
+                                    }}
+                                >
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                        <Button onClick={handleClick}> Enviar </Button>
+                    </ButtonGroup>
+                </Box>
+            )}
             {shuffledQuestion.type === 'Text' && (
                 <Box className={classes.question} type={shuffledQuestion.type}>
                     <Typography variant="h1">
-                        {props.index + 1}. {shuffledQuestion.title}
+                        {props.index}. {shuffledQuestion.title}
                     </Typography>
                     <VirtualKeyboard
                         input={value}
@@ -122,6 +192,8 @@ export default function Question(props) {
                         setNext={props.setNext}
                         className={classes.keyboard}
                         prefix={props.question.prefix}
+                        isValid={isValid}
+                        setIsValid={setIsValid}
                     >
                         <TextField
                             className={classes.answer}
@@ -139,7 +211,7 @@ export default function Question(props) {
             {shuffledQuestion.type === 'Phone' && (
                 <Box className={classes.question} type={shuffledQuestion.type}>
                     <Typography variant="h1">
-                        {props.index + 1}. {shuffledQuestion.title}
+                        {props.index}. {shuffledQuestion.title}
                     </Typography>
                     <VirtualKeyboard
                         input={value}
@@ -149,6 +221,8 @@ export default function Question(props) {
                         setNext={props.setNext}
                         className={classes.keyboard}
                         prefix={props.question.prefix}
+                        isValid={isValid}
+                        setIsValid={setIsValid}
                     >
                         <TextField
                             className={classes.answer}

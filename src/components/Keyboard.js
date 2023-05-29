@@ -9,6 +9,15 @@ import 'react-simple-keyboard/build/css/index.css';
 
 const useStyles = makeStyles((theme) => ({
     box: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        '& > *': {
+            margin: theme.spacing(2),
+        },
+    },
+    keyboardBox: {
         [theme.breakpoints.down('xs')]: {
             display: 'none',
         },
@@ -18,13 +27,6 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             width: '800px',
         },
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        '& > *': {
-            margin: theme.spacing(2),
-        },
     },
     keyboard: {
         marginTop: '50px',
@@ -33,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VirtualKeyboard(props) {
     const [inputMaskOptions, setInputMaskOptions] = useState({});
-    const [isValid, setIsValid] = useState(true);
     const classes = useStyles();
     const keyboard = useRef();
     const valuePrefix = props.prefix;
@@ -173,7 +174,7 @@ export default function VirtualKeyboard(props) {
             }
         }
 
-        setIsValid(false);
+        props.setIsValid(false);
     };
 
     const onKeyPress = (button) => {
@@ -203,25 +204,27 @@ export default function VirtualKeyboard(props) {
                     value: props.input,
                     onChange: onChangeInput,
                     className: child.props.className,
-                    error: !isValid,
-                    helperText: !isValid ? 'Campo inválido' : '',
+                    error: !props.isValid,
+                    helperText: !props.isValid ? 'Informe o valor correto' : '',
                 };
 
                 return React.cloneElement(child, updatedProps);
             })}
-            <Keyboard
-                class={classes.keyboard}
-                theme={'hg-theme-default hg-layout-default'}
-                keyboardRef={(r) => (keyboard.current = r)}
-                onInit={handleKeyboardInit}
-                layout={layout}
-                layoutName={props.keyboardLayout}
-                onChange={onChange}
-                onKeyPress={onKeyPress}
-                physicalKeyboardHighlight={true}
-                syncInstanceInputs={true}
-                display={display}
-            />
+            <Box className={classes.keyboardBox}>
+                <Keyboard
+                    class={classes.keyboard}
+                    theme={'hg-theme-default hg-layout-default'}
+                    keyboardRef={(r) => (keyboard.current = r)}
+                    onInit={handleKeyboardInit}
+                    layout={layout}
+                    layoutName={props.keyboardLayout}
+                    onChange={onChange}
+                    onKeyPress={onKeyPress}
+                    physicalKeyboardHighlight={true}
+                    syncInstanceInputs={true}
+                    display={display}
+                />
+            </Box>
         </Box>
     );
 }

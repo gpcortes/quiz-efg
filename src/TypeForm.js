@@ -21,6 +21,17 @@ export default function TypeForm(props) {
     const [index, setIndex] = useState(0);
     const [formValues, setFormValues] = useState([]);
     const [next, setNext] = useState(false);
+    const [nextQuestion, setNextQuestion] = useState(null);
+
+    const findChildIndexById = (id) => {
+        let foundIndex = -1;
+        React.Children.forEach(props.children, (child, idx) => {
+            if (child.props.id === id) {
+                foundIndex = idx;
+            }
+        });
+        return foundIndex;
+    };
 
     useEffect(() => {
         if (next) {
@@ -30,7 +41,16 @@ export default function TypeForm(props) {
     }, [next]);
 
     const nextField = () => {
-        if (index < children.length) setIndex((prev) => prev + 1);
+        if (nextQuestion !== null)
+            setIndex(() => {
+                const indexQuestion = findChildIndexById(nextQuestion);
+                if (indexQuestion < 0) {
+                    setIndex((prev) => prev + 1);
+                }
+                return indexQuestion;
+            });
+        if (nextQuestion === null && index < children.length)
+            setIndex((prev) => prev + 1);
         if (index >= children.length) {
             console.log(formValues);
             // window.location.reload(true);
@@ -41,10 +61,10 @@ export default function TypeForm(props) {
     //     if (index > 0) setIndex((prev) => prev - 1);
     // };
 
-    const handleSetFieldValues = (value, weigh) => {
+    const handleSetFieldValues = (id, value, weigh) => {
         const trimmedValue = String(value).trim();
         const fieldValue = {
-            id: index,
+            id: id,
             value: trimmedValue,
             weigh: weigh,
         };
@@ -100,6 +120,8 @@ export default function TypeForm(props) {
                     next: next,
                     setNext: setNext,
                     answers: formValues,
+                    nextQuestion: nextQuestion,
+                    setNextQuestion: setNextQuestion,
                 })}
             </motion.div>
         );

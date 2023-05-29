@@ -11,9 +11,9 @@ const theme = createTheme({
                 borderRadius: 10,
                 border: 0,
                 color: 'white',
-                height: 48,
+                minHeight: 48,
                 padding: '0 30px',
-                boxShadow: '0 3px 5px 2px rgba(82, 78, 78, .5)',
+                // boxShadow: '0 3px 5px 2px rgba(82, 78, 78, .5)',
             },
         },
         MuiRadio: {

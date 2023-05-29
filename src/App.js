@@ -11,7 +11,7 @@ export default function App() {
             <TypeForm>
                 <Presentation />
                 {questions.map((question, idx) => (
-                    <Question question={question} key={idx} />
+                    <Question question={question} key={idx} id={question.id} />
                 ))}
                 <ConfirmPage />
             </TypeForm>
