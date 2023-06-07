@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import VirtualKeyboard from './Keyboard';
+import logoh from '../assets/logoh.png';
 
 const useStyles = makeStyles((theme) => ({
     keyboard: {
@@ -43,6 +44,16 @@ const useStyles = makeStyles((theme) => ({
         },
         '&:focus': {
             backgroundColor: '#eee',
+        },
+    },
+    logoh: {
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+        },
+    },
+    logov: {
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
         },
     },
 }));
@@ -128,6 +139,17 @@ export default function Question(props) {
 
     return (
         <Fragment>
+            <Box>
+                <img
+                    src={logoh}
+                    alt="logo"
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        textAlign: 'center',
+                    }}
+                />
+            </Box>
             {shuffledQuestion.type.name === 'SingleOption' && (
                 <Box
                     className={classes.question}

@@ -4,6 +4,7 @@ import parse from 'html-react-parser';
 import { Button, Box, Typography } from '@material-ui/core';
 import { QRCodeSVG } from 'qrcode.react';
 import { makeStyles } from '@material-ui/core/styles';
+import logoh from '../assets/logoh.png';
 
 const courses = [
     {
@@ -149,6 +150,18 @@ export default function ConfirmPage(props) {
 
     return (
         <Fragment>
+            <Box>
+                <img
+                    src={logoh}
+                    alt="logo"
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        textAlign: 'center',
+                    }}
+                />
+            </Box>
+
             <Box className={classes.header}>
                 <Typography variant="h1">PARABÉNS!</Typography>
             </Box>
