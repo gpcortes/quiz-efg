@@ -187,16 +187,7 @@ export default function ConfirmPage(props) {
                                             level="H"
                                         />
                                     </Box>
-                                    {/* <Box className={classes.link}>
-                                        <Button
-                                            href={course.url}
-                                            variant="contained"
-                                            color="primary"
-                                        >
-                                            Vistar escola
-                                        </Button>
-                                    </Box>
-                                </Box> */}
+                                </Box>
                             </Box>
                         </Box>
                     );
