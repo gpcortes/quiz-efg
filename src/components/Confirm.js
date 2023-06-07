@@ -96,13 +96,13 @@ const useStyles = makeStyles((theme) => ({
     },
     qrcode: {
         textAlign: 'center',
-        [theme.breakpoints.down('sm')]: {
-            display: 'none',
-        },
+        // [theme.breakpoints.down('sm')]: {
+        //     display: 'none',
+        // },
     },
     link: {
         textAlign: 'center',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.down('lg')]: {
             display: 'none',
         },
     },
@@ -187,7 +187,7 @@ export default function ConfirmPage(props) {
                                             level="H"
                                         />
                                     </Box>
-                                    <Box className={classes.link}>
+                                    {/* <Box className={classes.link}>
                                         <Button
                                             href={course.url}
                                             variant="contained"
@@ -196,7 +196,7 @@ export default function ConfirmPage(props) {
                                             Vistar escola
                                         </Button>
                                     </Box>
-                                </Box>
+                                </Box> */}
                             </Box>
                         </Box>
                     );
