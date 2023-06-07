@@ -30,7 +30,7 @@ export default function App() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    'http://django-quiz-app-1:8000/api/v1/assessment/quiz/b04f63e9-595a-4056-98c5-601a103f4476/?format=json',
+                    'https://quiz-adm.cett.dev.br/api/v1/assessment/quiz/b04f63e9-595a-4056-98c5-601a103f4476/?format=json',
                     { timeout: 5000 }
                 );
                 setQuiz(response.data[0]);
@@ -46,7 +46,7 @@ export default function App() {
         const fetchData = async () => {
             try {
                 const response = await axios.post(
-                    'http://django-quiz-app-1:8000/api/v1/assessment/quizAnswer/' +
+                    'https://quiz-adm.cett.dev.br/api/v1/assessment/quizAnswer/' +
                         quiz._id +
                         '/create/',
                     { timeout: 5000 }
@@ -67,7 +67,7 @@ export default function App() {
         const fetchData = async () => {
             try {
                 const response = await axios.post(
-                    'http://django-quiz-app-1:8000/api/v1/assessment/quizAnswer/' +
+                    'https://quiz-adm.cett.dev.br/api/v1/assessment/quizAnswer/' +
                         quizAnswer._id +
                         '/complete/',
                     { timeout: 5000 }
@@ -95,7 +95,7 @@ export default function App() {
                     ],
                 };
                 const response = await axios.post(
-                    'http://django-quiz-app-1:8000/api/v1/assessment/questionAnswer/' +
+                    'https://quiz-adm.cett.dev.br/api/v1/assessment/questionAnswer/' +
                         quizAnswer._id +
                         '/create/',
                     data,
