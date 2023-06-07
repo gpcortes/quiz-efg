@@ -56,10 +56,22 @@ export default function Question(props) {
     );
     const [isValid, setIsValid] = useState(true);
 
-    const [keyboardLayout, setKeyboardLayout] = useState(props.question.type);
+    const [keyboardLayout, setKeyboardLayout] = useState(
+        props.question.type.name
+    );
 
     const handleSendAnswer = () => {
-        props.sendValue(props.question.id, value, props.question.weigh);
+        if (props.question.type.name === 'SingleOption') {
+            props.question.choices.map((choice) => {
+                if (choice.key === value) {
+                    props.sendAnswer(props.question, choice.key, choice.value);
+                }
+                return null
+            });
+        } else {
+            props.sendAnswer(props.question, props.question.type.name, value);
+        }
+        props.sendValue(props.question, value);
     };
 
     useEffect(() => {
@@ -89,7 +101,7 @@ export default function Question(props) {
         }
 
         setValue(newEvent.target.value);
-        if (props.question.type === 'SingleOption') {
+        if (props.question.type.name === 'SingleOption') {
             props.setNext(true);
         }
     };
@@ -97,9 +109,9 @@ export default function Question(props) {
     const handleSelect = (nextQuestion) => props.setNextQuestion(nextQuestion);
 
     function shuffleOptions(question) {
-        const { options, shuffle } = question;
+        const { choices, shuffle } = question;
         if (shuffle) {
-            const shuffledOptions = [...options];
+            const shuffledOptions = [...choices];
             for (let i = shuffledOptions.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffledOptions[i], shuffledOptions[j]] = [
@@ -107,7 +119,7 @@ export default function Question(props) {
                     shuffledOptions[i],
                 ];
             }
-            return { ...question, options: shuffledOptions };
+            return { ...question, choices: shuffledOptions };
         }
         return question;
     }
@@ -116,26 +128,26 @@ export default function Question(props) {
 
     return (
         <Fragment>
-            {shuffledQuestion.type === 'SingleOption' && (
+            {shuffledQuestion.type.name === 'SingleOption' && (
                 <Box
                     className={classes.question}
                     onChange={handleChange}
-                    type={shuffledQuestion.type}
+                    type={shuffledQuestion.type.name}
                 >
                     <Typography variant="h1">
                         {props.index}. {shuffledQuestion.title}
                     </Typography>
                     <RadioGroup aria-label="question" name="question">
-                        {shuffledQuestion.options.map((option, idx) => (
+                        {shuffledQuestion.choices.map((choice, idx) => (
                             <FormControlLabel
                                 className={classes.answer}
                                 key={idx}
-                                value={option.value}
+                                value={choice.key}
                                 control={<Radio />}
-                                label={option.label}
+                                label={choice.value}
                                 onChange={() => {
-                                    if (option.nextQuestion) {
-                                        handleSelect(option.nextQuestion);
+                                    if (choice.next) {
+                                        handleSelect(choice.next);
                                     } else {
                                         handleSelect(null);
                                     }
@@ -145,8 +157,11 @@ export default function Question(props) {
                     </RadioGroup>
                 </Box>
             )}
-            {shuffledQuestion.type === 'SelectOption' && (
-                <Box className={classes.question} type={shuffledQuestion.type}>
+            {shuffledQuestion.type.name === 'SelectOption' && (
+                <Box
+                    className={classes.question}
+                    type={shuffledQuestion.type.name}
+                >
                     <Typography variant="h1">
                         {props.index}. {shuffledQuestion.title}
                     </Typography>
@@ -158,20 +173,20 @@ export default function Question(props) {
                             className={classes.select}
                             error={!isValid}
                         >
-                            {shuffledQuestion.options.map((option, idx) => (
+                            {shuffledQuestion.choices.map((choice, idx) => (
                                 <MenuItem
                                     className={classes.menuItem}
                                     key={idx}
-                                    value={option.value}
+                                    value={choice.key}
                                     onClick={() => {
-                                        if (option.nextQuestion) {
-                                            handleSelect(option.nextQuestion);
+                                        if (choice.next) {
+                                            handleSelect(choice.next);
                                         } else {
                                             handleSelect(null);
                                         }
                                     }}
                                 >
-                                    {option.label}
+                                    {choice.value}
                                 </MenuItem>
                             ))}
                         </Select>
@@ -179,8 +194,11 @@ export default function Question(props) {
                     </ButtonGroup>
                 </Box>
             )}
-            {shuffledQuestion.type === 'Text' && (
-                <Box className={classes.question} type={shuffledQuestion.type}>
+            {shuffledQuestion.type.name === 'Text' && (
+                <Box
+                    className={classes.question}
+                    type={shuffledQuestion.type.name}
+                >
                     <Typography variant="h1">
                         {props.index}. {shuffledQuestion.title}
                     </Typography>
@@ -208,8 +226,11 @@ export default function Question(props) {
                     </VirtualKeyboard>
                 </Box>
             )}
-            {shuffledQuestion.type === 'Phone' && (
-                <Box className={classes.question} type={shuffledQuestion.type}>
+            {shuffledQuestion.type.name === 'Phone' && (
+                <Box
+                    className={classes.question}
+                    type={shuffledQuestion.type.name}
+                >
                     <Typography variant="h1">
                         {props.index}. {shuffledQuestion.title}
                     </Typography>
@@ -228,6 +249,38 @@ export default function Question(props) {
                             className={classes.answer}
                             variant="outlined"
                             label={shuffledQuestion.label}
+                        />
+                    </VirtualKeyboard>
+                </Box>
+            )}
+            {shuffledQuestion.type.name === 'PositiveIntegerNumber' && (
+                <Box
+                    className={classes.question}
+                    type={shuffledQuestion.type.name}
+                >
+                    <Typography variant="h1">
+                        {props.index}. {shuffledQuestion.title}
+                    </Typography>
+                    <VirtualKeyboard
+                        input={value}
+                        setInput={handleChange}
+                        keyboardLayout={keyboardLayout}
+                        setKeyboardLayout={setKeyboardLayout}
+                        setNext={props.setNext}
+                        className={classes.keyboard}
+                        prefix={props.question.prefix}
+                        isValid={isValid}
+                        setIsValid={setIsValid}
+                    >
+                        <TextField
+                            className={classes.answer}
+                            variant="outlined"
+                            label={shuffledQuestion.label}
+                            inputProps={{
+                                pattern: '[0-9]*',
+                                inputMode: 'numeric',
+                                min: '0',
+                            }}
                         />
                     </VirtualKeyboard>
                 </Box>

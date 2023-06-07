@@ -1,37 +1,37 @@
 const questions = [
     {
-        id: 'Nome',
+        _id: 'Nome',
         type: 'Text',
         title: 'Qual o seu nome e sobrenome?',
         label: 'Nome completo',
         shuffle: false,
-        weigh: false,
+        weight: false,
     },
     {
-        id: 'Whatsapp',
+        _id: 'Whatsapp',
         type: 'Phone',
         title: 'Qual o seu número de Whatsapp?',
         label: 'Número',
         shuffle: false,
-        weigh: false,
+        weight: false,
         prefix: '+55',
     },
     {
-        id: 'Goiânia',
+        _id: 'Goiânia',
         type: 'SingleOption',
         title: 'Você mora em Goiânia?',
-        options: [
-            { value: 's', label: 'Sim', nextQuestion: 'Quiz01' },
-            { value: 'n', label: 'Não', nextQuestion: 'Cidade' },
+        choices: [
+            { value: 's', label: 'Sim', next: 'Quiz01' },
+            { value: 'n', label: 'Não', next: 'Cidade' },
         ],
         shuffle: false,
-        weigh: false,
+        weight: false,
     },
     {
-        id: 'Cidade',
+        _id: 'Cidade',
         type: 'SelectOption',
         title: 'Em qual cidade você mora?',
-        options: [
+        choices: [
             { value: '520005005', label: 'Abadia de Goiás' },
             { value: '520010005', label: 'Abadiânia' },
             { value: '520013405', label: 'Acreúna' },
@@ -361,13 +361,13 @@ const questions = [
             { value: '521460625', label: 'Vila Taveira' },
         ],
         shuffle: false,
-        weigh: false,
+        weight: false,
     },
     {
-        id: 'Quiz01',
+        _id: 'Quiz01',
         type: 'SingleOption',
         title: 'Como é a sua personalidade?',
-        options: [
+        choices: [
             { value: 'a', label: 'Metódica' },
             { value: 'b', label: 'Tecnológica' },
             { value: 'c', label: 'Empreendedora' },
@@ -375,13 +375,13 @@ const questions = [
             { value: 'e', label: 'Influenciadora' },
         ],
         shuffle: true,
-        weigh: true,
+        weight: true,
     },
     {
-        id: 'Quiz02',
+        _id: 'Quiz02',
         type: 'SingleOption',
         title: 'Na escola, você prefere assuntos ligados à qual área do conhecimento?',
-        options: [
+        choices: [
             { value: 'a', label: 'Ciências exatas' },
             { value: 'b', label: 'Ciências humanas' },
             { value: 'c', label: 'Ciências naturais' },
@@ -389,13 +389,13 @@ const questions = [
             { value: 'e', label: 'Artes' },
         ],
         shuffle: true,
-        weigh: true,
+        weight: true,
     },
     {
-        id: 'Quiz03',
+        _id: 'Quiz03',
         type: 'SingleOption',
         title: 'Com o que você mais se identifica?',
-        options: [
+        choices: [
             { value: 'a', label: 'Praticidade e curiosidade' },
             { value: 'b', label: 'Sistemas e construção' },
             { value: 'c', label: 'Controle do tempo, comando e execução' },
@@ -406,27 +406,27 @@ const questions = [
             { value: 'e', label: 'Discurso, Argumentação e persuasão' },
         ],
         shuffle: true,
-        weigh: true,
+        weight: true,
     },
     {
-        id: 'Quiz04',
+        _id: 'Quiz04',
         type: 'SingleOption',
         title: 'Qual área mais desperta seu interesse?',
-        options: [
+        choices: [
             { value: 'a', label: 'Inteligência artificial' },
+            { value: 'b', label: 'Economia' },
             { value: 'c', label: 'Criatividade' },
             { value: 'd', label: 'Empreendedorismo' },
-            { value: 'b', label: 'Economia' },
             { value: 'e', label: 'Marketing' },
         ],
         shuffle: true,
-        weigh: true,
+        weight: true,
     },
     {
-        id: 'Quiz05',
+        _id: 'Quiz05',
         type: 'SingleOption',
         title: 'O que você quer aprender?',
-        options: [
+        choices: [
             {
                 value: 'a',
                 label: 'Utilizar métodos computacionais para ensinar os computadores a aprender com a experiência, sem depender de modelos pré-determinados',
@@ -449,13 +449,13 @@ const questions = [
             },
         ],
         shuffle: true,
-        weigh: true,
+        weight: true,
     },
     {
-        id: 'Quiz06',
+        _id: 'Quiz06',
         type: 'SingleOption',
         title: 'Quanto você quer ganhar?',
-        options: [
+        choices: [
             { value: 'a', label: '+ R$3.000,00' },
             { value: 'b', label: '+ R$4.000,00' },
             { value: 'c', label: '+ R$5.000,00' },
@@ -463,7 +463,7 @@ const questions = [
             { value: 'e', label: 'Ao infinito e além!' },
         ],
         shuffle: false,
-        weigh: false,
+        weight: false,
     },
 ];
 

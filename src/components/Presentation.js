@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Presentation(props) {
     const classes = useStyles();
 
+    const handleOnClick = () => {
+        props.onClick(props.quizId);
+        props.setNext(true);
+    };
+
     return (
         <Fragment>
             <Box id={props.index} key={props.index}>
@@ -48,7 +53,7 @@ export default function Presentation(props) {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={props.setNext}
+                        onClick={handleOnClick}
                     >
                         Vamos começar
                     </Button>

@@ -1,11 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import Keyboard from 'react-simple-keyboard';
-// import inputMask from 'simple-keyboard-input-mask';
 import 'react-simple-keyboard/build/css/index.css';
-// import { Icon } from '@iconify/react';
-// import mdiPlus from '@iconify/icons-mdi/plus';
-// import mdiMinus from '@iconify/icons-mdi/minus';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -39,13 +35,18 @@ export default function VirtualKeyboard(props) {
     const keyboard = useRef();
     const valuePrefix = props.prefix;
 
-    useEffect(() => {}, [props.keyboardLayout]);
-
     const handleKeyboardInit = (keyboard) => {
         if (props.keyboardLayout === 'Phone') {
             setInputMaskOptions({
                 default: {
                     mask: '+99 (99) 9 9999-9999',
+                    regex: /[^0-9]/g,
+                },
+            });
+        } else if (props.keyboardLayout === 'PositiveIntegerNumber') {
+            setInputMaskOptions({
+                default: {
+                    mask: null,
                     regex: /[^0-9]/g,
                 },
             });
@@ -139,7 +140,7 @@ export default function VirtualKeyboard(props) {
             '{shift} \\ z x c v b n m , . ; / {shift}',
             '.com @ {space}',
         ],
-        Numeric: ['1 2 3', '4 5 6', '7 8 9', '{bksp} 0 {enter}'],
+        PositiveIntegerNumber: ['1 2 3', '4 5 6', '7 8 9', '{bksp} 0 {enter}'],
         Phone: ['1 2 3', '4 5 6', '7 8 9', '{bksp} 0 {enter}'],
     };
 
@@ -162,7 +163,7 @@ export default function VirtualKeyboard(props) {
         const { mask, regex } = inputMaskOptions.default;
         const cleanInput = props.input.replace(regex, '');
 
-        if (!mask && cleanInput.length > 9) {
+        if (!mask && cleanInput.length > 0) {
             props.setNext(true);
         }
 

@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const courses = [
     {
-        option: 'a',
+        choice: 'a',
         title: 'Aprendizado de Máquina',
         curses: ['Aprendizado de Máquina'],
         description:
@@ -15,7 +15,7 @@ const courses = [
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
-        option: 'b',
+        choice: 'b',
         title: 'Desenvolvimento Web e Mobile',
         curses: ['Desenvolvimento Web e Mobile'],
         description:
@@ -23,7 +23,7 @@ const courses = [
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
-        option: 'c',
+        choice: 'c',
         title: 'Empresas Digitais',
         curses: ['Empresas Digitais'],
         description:
@@ -31,7 +31,7 @@ const courses = [
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
-        option: 'd',
+        choice: 'd',
         title: 'Economia Criativa',
         curses: ['Economia Criativa'],
         description:
@@ -39,7 +39,7 @@ const courses = [
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
-        option: 'e',
+        choice: 'e',
         title: 'Marketing e Mídias Sociais',
         curses: ['Marketing e Mídias Sociais'],
         description:
@@ -112,25 +112,40 @@ export default function ConfirmPage(props) {
     const classes = useStyles();
 
     const answer = props.answers
-        .filter((field) => field.weigh)
+        .filter((field) => field.weight)
         .reduce(function (acc, field) {
             acc[field.value] = field.value in acc ? acc[field.value] + 1 : 1;
             return acc;
         }, {});
 
-    const option = Object.keys(answer).reduce(function (acc, e) {
+    const choice = Object.keys(answer).reduce(function (acc, e) {
         if (answer[e] > acc.answer) {
             acc.answer = answer[e];
-            acc.option = e;
+            acc.choice = e;
         }
         return acc;
     });
 
     const handleSubmit = (event) => {
-        // event.preventDefault();
-        props.sendValue(option, false);
-        // window.location.reload(true);
+        event.preventDefault();
+        courses.map((course) => {
+            if (course.choice === choice) {
+                props.sendAnswer(
+                    { title: 'Seu próximo curso é ' },
+                    choice,
+                    course.title
+                );
+            }
+            return null;
+        });
+        // props.sendValue(choice, false);
+        props.completeAnswer();
+        window.location.reload(true);
     };
+
+    if (props.answers.length === 0) {
+        return <p>Carregando...</p>;
+    }
 
     return (
         <Fragment>
@@ -139,7 +154,7 @@ export default function ConfirmPage(props) {
             </Box>
             {/* eslint-disable-next-line */}
             {courses.map((course, idx) => {
-                if (course.option === option) {
+                if (course.choice === choice) {
                     return (
                         <Box key={idx}>
                             <Box>

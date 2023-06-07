@@ -61,12 +61,12 @@ export default function TypeForm(props) {
     //     if (index > 0) setIndex((prev) => prev - 1);
     // };
 
-    const handleSetFieldValues = (id, value, weigh) => {
+    const handleSetFieldValues = (question, value) => {
         const trimmedValue = String(value).trim();
         const fieldValue = {
-            id: id,
+            _id: question.weight._id,
             value: trimmedValue,
-            weigh: weigh,
+            weight: question.weight,
         };
         if (fieldValue.value !== '') {
             setFormValues((prevFormValues) => {
