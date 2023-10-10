@@ -52,10 +52,7 @@ const courses = [
 
 const useStyles = makeStyles((theme) => ({
     logo: {
-        ['@media (min-width:769px)']: {
-            margin: '0 auto',
-            // height: '26vh',
-        },
+        margin: '0 auto',
     },
     header: {
         display: 'flex',

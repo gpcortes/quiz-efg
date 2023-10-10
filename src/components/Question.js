@@ -66,10 +66,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     logo: {
-        ['@media (min-width:769px)']: {
-            margin: '0 auto',
-            width: '40%',
-        },
+        margin: '0 auto',
     },
     logoh: {
         [theme.breakpoints.down('sm')]: {
