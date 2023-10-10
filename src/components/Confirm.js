@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import logoh from '../assets/logoh.png';
 import { ScreenOrientationContext } from '../ScreenOrientationContext';
 
-courses = [
+const courses = [
     {
         choice: 'a',
         title: 'Aprendizado de Máquina',
