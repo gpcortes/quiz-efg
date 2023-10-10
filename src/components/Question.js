@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import {
     Radio,
     RadioGroup,
@@ -14,6 +14,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import VirtualKeyboard from './Keyboard';
 import logoh from '../assets/logoh.png';
+import { ScreenOrientationContext } from '../ScreenOrientationContext';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     header: {
         display: 'flex',
         justifyContent: 'center',
-        height: '26vh',
+        // height: '26vh',
         padding: '4vh 0px 4vh 0px',
     },
     footer: {
@@ -95,6 +96,24 @@ export default function Question(props) {
         props.question.type.name
     );
 
+    const orientation = useContext(ScreenOrientationContext);
+
+    const [height, setHeight] = useState(() => {
+        if (orientation === 'portrait') {
+            return '26vh';
+        } else {
+            return '40vh';
+        }
+    });
+
+    useEffect(() => {
+        if (orientation === 'portrait') {
+            setHeight('26vh');
+        } else {
+            setHeight('40vh');
+        }
+    }, [orientation]);
+
     const handleSendAnswer = () => {
         if (props.question.type.name === 'SingleOption') {
             props.question.choices.map((choice) => {
@@ -163,7 +182,7 @@ export default function Question(props) {
 
     return (
         <Fragment>
-            <Box className={classes.header}>
+            <Box className={classes.header} style={{ height: height }}>
                 <img
                     src={logoh}
                     alt="header"

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Fragment } from 'react';
+import { Fragment , useContext, useEffect, useState} from 'react';
 import parse from 'html-react-parser';
 import { Button, Box, Typography } from '@material-ui/core';
 import { QRCodeSVG } from 'qrcode.react';
 import { makeStyles } from '@material-ui/core/styles';
 import logoh from '../assets/logoh.png';
+import { ScreenOrientationContext } from '../ScreenOrientationContext';
 
 const courses = [
     {
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     logo: {
         ['@media (min-width:769px)']: {
             margin: '0 auto',
-            height: '26vh',
+            // height: '26vh',
         },
     },
     header: {
@@ -133,6 +134,24 @@ export default function ConfirmPage(props) {
         return acc;
     });
 
+    const orientation = useContext(ScreenOrientationContext);
+
+    const [height, setHeight] = useState(() => {
+        if (orientation === 'portrait') {
+            return '26vh';
+        } else {
+            return '40vh';
+        }
+    });
+
+    useEffect(() => {
+        if (orientation === 'portrait') {
+            setHeight('26vh');
+        } else {
+            setHeight('40vh');
+        }
+    }, [orientation]);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         courses.map((course) => {
@@ -156,7 +175,7 @@ export default function ConfirmPage(props) {
 
     return (
         <Fragment>
-            <Box className={classes.logo}>
+            <Box className={classes.logo} style={{height: height}} >
                 <img
                     src={logoh}
                     alt="logo"
