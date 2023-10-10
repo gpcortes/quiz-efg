@@ -7,13 +7,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import logoh from '../assets/logoh.png';
 import { ScreenOrientationContext } from '../ScreenOrientationContext';
 
-const courses = [
+courses = [
     {
         choice: 'a',
         title: 'Aprendizado de Máquina',
         curses: ['Aprendizado de Máquina'],
         description:
-            '<p>Voc&ecirc; &eacute; uma pessoa que cumpre os procedimentos e estabelece crit&eacute;rios para realizar as atividades de sua vida cotidiana. Por buscar agilidade e automa&ccedil;&atilde;o nas diferentes esferas da sua vida, &eacute; uma pessoa curiosa nas possibilidades tecnol&oacute;gicas de otimiza&ccedil;&atilde;o do tempo e organiza&ccedil;&atilde;o das tarefas. Por isso, a intelig&ecirc;ncia artificial desperta a sua curiosidade, pois pode te ajudar a utilizar m&eacute;todos computacionais para ensinar os computadores a aprender com a experi&ecirc;ncia, sem depender de modelos pr&eacute;-determinados e resolver grande parte dos seus problemas.</p>',
+            '<p>Voc&ecirc; &eacute; uma pessoa que cumpre os procedimentos e estabelece crit&eacute;rios para realizar as atividades de sua vida cotidiana. Por buscar agilidade e automa&ccedil;&atilde;o nas diferentes esferas da sua vida, &eacute; algu&eacute;m que busca nas possibilidades tecnol&oacute;gicas, a otimiza&ccedil;&atilde;o do tempo e a organiza&ccedil;&atilde;o das tarefas. A intelig&ecirc;ncia artificial desperta sua curiosidade! E voc&ecirc; sabe o que ela &eacute; capaz de fazer? Por meio da intelig&ecirc;ncia artificial e seus m&eacute;todos os computadores s&atilde;o ensinados a resolverem problemas, a partir da experi&ecirc;ncia, sem depender de modelos pr&eacute;-determinados. Um curso de Aprendizado de M&aacute;quinas &eacute; a chave para turbinar sua carreira profissional. Ela te ajudar&aacute; a dominar essa t&eacute;cnica. Inscreva-se j&aacute;. </p>',
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
@@ -21,7 +21,7 @@ const courses = [
         title: 'Desenvolvimento Web e Mobile',
         curses: ['Desenvolvimento Web e Mobile'],
         description:
-            '<p>Voc&ecirc; &eacute; uma pessoa bem-informada sobre as novas tecnologias e nos diferentes recursos inovadores para a sua vida cotidiana. Pensar em sistemas e na constru&ccedil;&atilde;o de novos softwares &eacute; sua principal habilidade! Por esta raz&atilde;o, aprender a desenvolver sites, aplicativos, softwares, banco de dados e outras ferramentas da internet, atrav&eacute;s da linguagem de programa&ccedil;&atilde;o, pode te ajudar em sua carreira profissional e na sua vida pessoal.</p>',
+            '<p>Voc&ecirc; &eacute; uma pessoa bem-informada sobre novas tecnologias e recursos inovadores para a vida cotidiana. Pensar em sistemas e na constru&ccedil;&atilde;o de novos softwares &eacute; sua principal habilidade! Aprender a desenvolver sites, aplicativos, softwares, banco de dados e outras ferramentas da internet, atrav&eacute;s da linguagem de programa&ccedil;&atilde;o, &eacute; o caminho para sua carreira profissional. Que tal conhecer mais sobre Desenvolvimento Web e Mobile? Fa&ccedil;a j&aacute; sua inscri&ccedil;&atilde;o. </p>',
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
@@ -29,7 +29,7 @@ const courses = [
         title: 'Empresas Digitais',
         curses: ['Empresas Digitais'],
         description:
-            '<p>Sua mente empreendedora poder&aacute; te ajudar no controle do tempo, comando e execu&ccedil;&atilde;o de diferentes atividades relacionadas ao empreendedorismo. Por isto, planejar e criar novos neg&oacute;cios (Start ups) para atuar no mercado digital, utilizando diferentes t&eacute;cnicas para promover o seu sucesso, pode ser uma boa alternativa profissional para voc&ecirc;!</p>',
+            '<p>Sua mente empreendedora te ajuda no controle do tempo e no comando e execu&ccedil;&atilde;o de diferentes atividades relacionadas ao empreendedorismo. Planejar e criar neg&oacute;cios para atuar no mercado digital, utilizando diferentes t&eacute;cnicas para promover o seu sucesso, pode ser uma boa alternativa profissional para voc&ecirc;! Inscreva-se j&aacute; no curso Empresas Digitais! Ele tem a sua cara. Inscreva-se agora mesmo. </p>',
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
@@ -37,7 +37,7 @@ const courses = [
         title: 'Economia Criativa',
         curses: ['Economia Criativa'],
         description:
-            '<p>Sua mente criativa pode te ajudar a pensar em solu&ccedil;&otilde;es empreendedoras e relacionadas &agrave; inova&ccedil;&atilde;o e tecnologia para diferentes pessoas de todos os n&iacute;veis sociais e culturais. Por ter afinidade com a economia, &eacute; fundamental que voc&ecirc; aprenda a empreender, de forma criativa, nos diferentes setores culturais e tecnol&oacute;gicos, por meio dos princ&iacute;pios da economia circular e das tecnologias 4.0 e 5.0.</p>',
+            '<p>Sua mente criativa te ajuda a pensar em solu&ccedil;&otilde;es empreendedoras e relacionadas &agrave; inova&ccedil;&atilde;o e tecnologia. Sabe o que mais falta para voc&ecirc; deslanchar nessa carreira? Afinidade com economia criativa! Esse &eacute; um dos caminhos para que voc&ecirc; aprenda a empreender, nos diferentes setores culturais e tecnol&oacute;gicos, por meio dos princ&iacute;pios da economia circular e das tecnologias 4.0 e 5.0. N&atilde;o perca a chance e se inscreva agora mesmo no curso de Economia Criativa.</p>',
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
@@ -45,7 +45,7 @@ const courses = [
         title: 'Marketing e Mídias Sociais',
         curses: ['Marketing e Mídias Sociais'],
         description:
-            '<p>Sua personalidade influenciadora revela muito sobre as suas habilidades de discurso, argumenta&ccedil;&atilde;o e persuas&atilde;o em prol de algum produto ou ideal que voc&ecirc; acredita. Por isso, o marketing pode te ajudar a realizar o planejamento, a cria&ccedil;&atilde;o e a gest&atilde;o de tr&aacute;fego digital, m&iacute;dias e produtos digitais em diferentes plataformas digitais e redes sociais.</p>',
+            '<p>Sua personalidade influenciadora revela muito sobre suas habilidades de discurso, argumenta&ccedil;&atilde;o e persuas&atilde;o em prol de algum produto ou ideal que voc&ecirc; acredita. Sabe o que mais voc&ecirc; precisa para incrementar suas habilidades? Um curso de Marketing e M&iacute;dias Sociais! Ele te capacita sobre como realizar planejamento, cria&ccedil;&atilde;o e gest&atilde;o de m&iacute;dias, produtos e tr&aacute;fego digitais, em diferentes plataformas e redes sociais. Inscreva-se agora mesmo. </p>',
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
 ];
