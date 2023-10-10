@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
+import './Keyboard.css';
+
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -153,6 +155,7 @@ export default function VirtualKeyboard(props) {
         '{space}': 'Espaço',
     };
 
+
     const handleShift = () => {
         const newKeyboardLayout =
             props.keyboardLayout === 'default' ? 'shift' : 'default';
@@ -217,8 +220,18 @@ export default function VirtualKeyboard(props) {
                     theme={'hg-theme-default hg-layout-default'}
                     keyboardRef={(r) => (keyboard.current = r)}
                     onInit={handleKeyboardInit}
-                    layout={layout}
                     layoutName={props.keyboardLayout}
+                    layout={layout}
+                    buttonTheme={[
+                        {
+                            class: 'hg-green',
+                            buttons: '{enter}',
+                        },
+                        {
+                            class: 'hg-red',
+                            buttons: '{bksp}',
+                        },
+                    ]}
                     onChange={onChange}
                     onKeyPress={onKeyPress}
                     physicalKeyboardHighlight={true}

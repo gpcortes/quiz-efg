@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { Box, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Logo from './Logo';
+// import Logo from './Logo';
+import logoh from '../assets/logoh.png';
 
 const useStyles = makeStyles((theme) => ({
     question: {
@@ -20,10 +21,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     logo: {
-        [theme.breakpoints.up('md')]: {
-            margin: '0 auto',
-            width: '60%',
-        },
+        display: 'flex',
+        justifyContent: 'center',
+        height: '26vh',
+        padding: '4vh 0px 4vh 0px',
     },
 }));
 
@@ -39,12 +40,21 @@ export default function Presentation(props) {
         <Fragment>
             <Box id={props.index} key={props.index}>
                 <Box className={classes.logo} id={props.index}>
-                    <Logo />
+                    <img
+                        src={logoh}
+                        alt="header"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain',
+                        }}
+                    />
                 </Box>
                 <Box className={classes.question}>
                     <Typography
                         variant="h1"
                         style={{
+                            padding: '20px 20%',
                             textAlign: 'center',
                         }}
                     >

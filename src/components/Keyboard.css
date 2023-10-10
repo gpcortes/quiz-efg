@@ -1,0 +1,14 @@
+.hg-button.hg-green {
+    background: rgb(45, 172, 106, 0.5);
+    color: white;
+}
+
+.hg-button.hg-red {
+    background: rgb(255, 0, 0, 0.5);
+    color: white;
+}
+
+.hg-button.hg-highlight {
+    box-shadow: 0px 0px 10px 5px rgba(45, 172, 106, 0.5);
+    z-index: 1;
+}

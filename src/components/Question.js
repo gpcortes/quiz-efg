@@ -16,6 +16,24 @@ import VirtualKeyboard from './Keyboard';
 import logoh from '../assets/logoh.png';
 
 const useStyles = makeStyles((theme) => ({
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100vh',
+    },
+    header: {
+        display: 'flex',
+        justifyContent: 'center',
+        height: '26vh',
+        padding: '4vh 0px 4vh 0px',
+    },
+    footer: {
+        display: 'flex',
+        justifyContent: 'center',
+        height: '10vh',
+        padding: '0vh 0px 0vh 0px',
+    },
     keyboard: {
         width: '800px',
     },
@@ -44,6 +62,12 @@ const useStyles = makeStyles((theme) => ({
         },
         '&:focus': {
             backgroundColor: '#eee',
+        },
+    },
+    logo: {
+        ['@media (min-width:769px)']: {
+            margin: '0 auto',
+            width: '40%',
         },
     },
     logoh: {
@@ -77,7 +101,7 @@ export default function Question(props) {
                 if (choice.key === value) {
                     props.sendAnswer(props.question, choice.key, choice.value);
                 }
-                return null
+                return null;
             });
         } else {
             props.sendAnswer(props.question, props.question.type.name, value);
@@ -139,14 +163,14 @@ export default function Question(props) {
 
     return (
         <Fragment>
-            <Box>
+            <Box className={classes.header}>
                 <img
                     src={logoh}
-                    alt="logo"
+                    alt="header"
                     style={{
                         width: '100%',
                         height: '100%',
-                        textAlign: 'center',
+                        objectFit: 'contain',
                     }}
                 />
             </Box>

@@ -50,6 +50,12 @@ const courses = [
 ];
 
 const useStyles = makeStyles((theme) => ({
+    logo: {
+        ['@media (min-width:769px)']: {
+            margin: '0 auto',
+            height: '26vh',
+        },
+    },
     header: {
         display: 'flex',
         flexDirection: 'column',
@@ -150,14 +156,14 @@ export default function ConfirmPage(props) {
 
     return (
         <Fragment>
-            <Box>
+            <Box className={classes.logo}>
                 <img
                     src={logoh}
                     alt="logo"
                     style={{
                         width: '100%',
                         height: '100%',
-                        textAlign: 'center',
+                        objectFit: 'contain',
                     }}
                 />
             </Box>
@@ -172,7 +178,12 @@ export default function ConfirmPage(props) {
                         <Box key={idx}>
                             <Box>
                                 <br />
-                                <Typography variant="h2">
+                                <Typography
+                                    variant="h2"
+                                    style={{
+                                        textAlign: 'center',
+                                    }}
+                                >
                                     Seu próximo curso é {course.title}
                                 </Typography>
                                 <br />
@@ -189,7 +200,7 @@ export default function ConfirmPage(props) {
                                             textAlign: 'center',
                                         }}
                                     >
-                                        Conheça nossas Escolas
+                                        Conheça nossas Escolas:
                                     </Typography>
                                     <br />
                                     <Box className={classes.qrcode}>
