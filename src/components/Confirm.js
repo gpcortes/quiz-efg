@@ -6,6 +6,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { makeStyles } from '@material-ui/core/styles';
 import logoh from '../assets/logoh.png';
 import { ScreenOrientationContext } from '../ScreenOrientationContext';
+import Arte01 from '../assets/arte01.png';
 
 const courses = [
     {
@@ -172,7 +173,26 @@ export default function ConfirmPage(props) {
 
     return (
         <Fragment>
-            <Box className={classes.logo} style={{height: height}} >
+            <Box
+                style={{
+                    position: 'relative',
+                    width: '100%',
+                }}
+            >
+                <img
+                    src={Arte01}
+                    alt="Arte01"
+                    style={{
+                        position: 'absolute',
+                        top: '-150px',
+                        right: '-50px',
+                        width: 'auto',
+                        height: '500px',
+                        zIndex: -1,
+                    }}
+                />
+            </Box>
+            <Box className={classes.logo} style={{ height: height }}>
                 <img
                     src={logoh}
                     alt="logo"
@@ -185,6 +205,25 @@ export default function ConfirmPage(props) {
             </Box>
 
             <Box className={classes.header}>
+                <Box
+                    style={{
+                        position: 'relative',
+                        width: '100%',
+                    }}
+                >
+                    <img
+                        src={Arte01}
+                        alt="Arte01"
+                        style={{
+                            position: 'absolute',
+                            top: '-150px',
+                            left: '-150px',
+                            width: 'auto',
+                            height: '300px',
+                            zIndex: -1,
+                        }}
+                    />
+                </Box>
                 <Typography variant="h1">PARABÉNS!</Typography>
             </Box>
             {/* eslint-disable-next-line */}
