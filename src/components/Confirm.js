@@ -6,7 +6,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { makeStyles } from '@material-ui/core/styles';
 import logoh from '../assets/logoh.png';
 import { ScreenOrientationContext } from '../ScreenOrientationContext';
-import Arte01 from '../assets/arte01.png';
+import Arte01 from '../assets/fireworks.gif';
 
 const courses = [
     {
@@ -54,6 +54,7 @@ const courses = [
 const useStyles = makeStyles((theme) => ({
     logo: {
         margin: '0 auto',
+        maxWidth: '40vw',
     },
     header: {
         display: 'flex',
@@ -63,7 +64,15 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(4),
         marginBottom: theme.spacing(4),
     },
-
+    content: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: theme.spacing(3),
+        padding: theme.spacing(10),
+        paddingLeft: '10vw',
+        paddingRight: '10vw',
+    },
     listCourses: {
         display: 'flex',
         flexDirection: 'column',
@@ -226,52 +235,54 @@ export default function ConfirmPage(props) {
                 </Box>
                 <Typography variant="h1">PARABÉNS!</Typography>
             </Box>
-            {/* eslint-disable-next-line */}
-            {courses.map((course, idx) => {
-                if (course.choice === choice) {
-                    return (
-                        <Box key={idx}>
-                            <Box>
-                                <br />
-                                <Typography
-                                    variant="h2"
-                                    style={{
-                                        textAlign: 'center',
-                                    }}
-                                >
-                                    Seu próximo curso é {course.title}
-                                </Typography>
-                                <br />
-                                <Typography>
-                                    {parse(course.description)}
-                                </Typography>
-                                <br />
-                            </Box>
-                            <Box className={classes.result}>
-                                <Box className={classes.card}>
+            <Box className={classes.content}>
+                {/* eslint-disable-next-line */}
+                {courses.map((course, idx) => {
+                    if (course.choice === choice) {
+                        return (
+                            <Box key={idx}>
+                                <Box>
+                                    <br />
                                     <Typography
                                         variant="h2"
                                         style={{
                                             textAlign: 'center',
                                         }}
                                     >
-                                        Conheça nossas Escolas:
+                                        Seu próximo curso é {course.title}
                                     </Typography>
                                     <br />
-                                    <Box className={classes.qrcode}>
-                                        <QRCodeSVG
-                                            value={course.url}
-                                            bgColor="none"
-                                            size="256"
-                                            level="H"
-                                        />
+                                    <Typography>
+                                        {parse(course.description)}
+                                    </Typography>
+                                    <br />
+                                </Box>
+                                <Box className={classes.result}>
+                                    <Box className={classes.card}>
+                                        <Typography
+                                            variant="h2"
+                                            style={{
+                                                textAlign: 'center',
+                                            }}
+                                        >
+                                            Conheça nossas Escolas:
+                                        </Typography>
+                                        <br />
+                                        <Box className={classes.qrcode}>
+                                            <QRCodeSVG
+                                                value={course.url}
+                                                bgColor="none"
+                                                size="256"
+                                                level="H"
+                                            />
+                                        </Box>
                                     </Box>
                                 </Box>
                             </Box>
-                        </Box>
-                    );
-                }
-            })}
+                        );
+                    }
+                })}
+            </Box>
             <Box className={classes.footer}>
                 <Button
                     type="submit"
