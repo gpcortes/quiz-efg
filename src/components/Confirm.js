@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fragment , useContext, useEffect, useState} from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 import { Button, Box, Typography } from '@material-ui/core';
 import { QRCodeSVG } from 'qrcode.react';
@@ -52,6 +52,15 @@ const courses = [
 ];
 
 const useStyles = makeStyles((theme) => ({
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        overflow: 'hidden',
+        height: '100vh',
+        paddingTop: '10vh',
+        paddingBottom: '10vh'
+    },
     logo: {
         margin: '0 auto',
         maxWidth: '40vw',
@@ -182,38 +191,7 @@ export default function ConfirmPage(props) {
 
     return (
         <Fragment>
-            <Box
-                style={{
-                    position: 'relative',
-                    width: '100%',
-                }}
-            >
-                <img
-                    src={Arte01}
-                    alt="Arte01"
-                    style={{
-                        position: 'absolute',
-                        top: '-150px',
-                        right: '-50px',
-                        width: 'auto',
-                        height: '500px',
-                        zIndex: -1,
-                    }}
-                />
-            </Box>
-            <Box className={classes.logo} style={{ height: height }}>
-                <img
-                    src={logoh}
-                    alt="logo"
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                    }}
-                />
-            </Box>
-
-            <Box className={classes.header}>
+            <Box className={classes.container}>
                 <Box
                     style={{
                         position: 'relative',
@@ -226,72 +204,105 @@ export default function ConfirmPage(props) {
                         style={{
                             position: 'absolute',
                             top: '-150px',
-                            left: '-150px',
+                            right: '-50px',
                             width: 'auto',
-                            height: '300px',
+                            height: '500px',
                             zIndex: -1,
                         }}
                     />
                 </Box>
-                <Typography variant="h1">PARABÉNS!</Typography>
-            </Box>
-            <Box className={classes.content}>
-                {/* eslint-disable-next-line */}
-                {courses.map((course, idx) => {
-                    if (course.choice === choice) {
-                        return (
-                            <Box key={idx}>
-                                <Box>
-                                    <br />
-                                    <Typography
-                                        variant="h2"
-                                        style={{
-                                            textAlign: 'center',
-                                        }}
-                                    >
-                                        Seu próximo curso é {course.title}
-                                    </Typography>
-                                    <br />
-                                    <Typography>
-                                        {parse(course.description)}
-                                    </Typography>
-                                    <br />
-                                </Box>
-                                <Box className={classes.result}>
-                                    <Box className={classes.card}>
+                <Box className={classes.logo} style={{ height: height }}>
+                    <img
+                        src={logoh}
+                        alt="logo"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain',
+                        }}
+                    />
+                </Box>
+
+                <Box className={classes.header}>
+                    <Typography variant="h1">PARABÉNS!</Typography>
+                </Box>
+                <Box className={classes.content}>
+                    <Box
+                        style={{
+                            position: 'relative',
+                            width: '100%',
+                        }}
+                    >
+                        <img
+                            src={Arte01}
+                            alt="Arte01"
+                            style={{
+                                position: 'absolute',
+                                top: '-150px',
+                                left: '-150px',
+                                width: 'auto',
+                                height: '300px',
+                                zIndex: -1,
+                            }}
+                        />
+                    </Box>
+                    {/* eslint-disable-next-line */}
+                    {courses.map((course, idx) => {
+                        if (course.choice === choice) {
+                            return (
+                                <Box key={idx}>
+                                    <Box>
+                                        <br />
                                         <Typography
                                             variant="h2"
                                             style={{
                                                 textAlign: 'center',
                                             }}
                                         >
-                                            Conheça nossas Escolas:
+                                            Seu próximo curso é {course.title}
                                         </Typography>
                                         <br />
-                                        <Box className={classes.qrcode}>
-                                            <QRCodeSVG
-                                                value={course.url}
-                                                bgColor="none"
-                                                size="256"
-                                                level="H"
-                                            />
+                                        <Typography>
+                                            {parse(course.description)}
+                                        </Typography>
+                                        <br />
+                                    </Box>
+                                    <Box className={classes.result}>
+                                        <Box className={classes.card}>
+                                            <Typography
+                                                variant="h2"
+                                                style={{
+                                                    textAlign: 'center',
+                                                }}
+                                            >
+                                                Conheça nossas Escolas:
+                                            </Typography>
+                                            <br />
+                                            <Box className={classes.qrcode}>
+                                                <QRCodeSVG
+                                                    value={course.url}
+                                                    bgColor="none"
+                                                    size="256"
+                                                    level="H"
+                                                />
+                                            </Box>
                                         </Box>
                                     </Box>
                                 </Box>
-                            </Box>
-                        );
-                    }
-                })}
-            </Box>
-            <Box className={classes.footer}>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                >
-                    Recomeçar
-                </Button>
+                            );
+                        }
+                    })}
+                </Box>
+                <Box className={classes.footer}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSubmit}
+                    >
+                        Recomeçar
+                    </Button>
+                </Box>
             </Box>
         </Fragment>
     );
