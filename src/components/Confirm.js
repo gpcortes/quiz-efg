@@ -30,7 +30,7 @@ const courses = [
         title: 'Empresas Digitais',
         curses: ['Empresas Digitais'],
         description:
-            '<p>Sua mente empreendedora te ajuda no controle do tempo e no comando e execu&ccedil;&atilde;o de diferentes atividades relacionadas ao empreendedorismo. Planejar e criar neg&oacute;cios para atuar no mercado digital, utilizando diferentes t&eacute;cnicas para promover o seu sucesso, pode ser uma boa alternativa profissional para voc&ecirc;! Inscreva-se j&aacute; no curso Empresas Digitais! Ele tem a sua cara. Inscreva-se agora mesmo. </p>',
+            '<p>Sua mente empreendedora te ajuda no controle do tempo e no comando e execu&ccedil;&atilde;o de diferentes atividades relacionadas ao empreendedorismo. Planejar e criar neg&oacute;cios com atua&ccedil;&atilde;o no mercado digital, utilizando diferentes t&eacute;cnicas para promover o seu sucesso, pode ser uma boa alternativa profissional para voc&ecirc;! Inscreva-se j&aacute; no curso Empresas Digitais! Ele tem a sua cara. Inscreva-se agora mesmo. </p>',
         url: 'https://efg.org.br/fale-conosco/unidades',
     },
     {
