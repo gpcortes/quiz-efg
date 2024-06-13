@@ -30,7 +30,7 @@ export default function App() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    'https://quiz-adm.cett.dev.br/api/v1/assessment/quiz/b04f63e9-595a-4056-98c5-601a103f4476/?format=json',
+                    'https://quiz-adm.cett.dev.br/api/v1/assessment/quiz/500cd670-ad66-4aec-944d-f0dbdd317b68/?format=json',
                     { timeout: 5000 }
                 );
                 setQuiz(response.data[0]);
